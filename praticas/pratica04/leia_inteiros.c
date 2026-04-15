@@ -2,7 +2,8 @@
 
 int main() {
 
-    int num1, num2;
+    int num1;
+    int num2;
 
     printf("digite o primeiro: ");
     scanf("%i", &num1);
