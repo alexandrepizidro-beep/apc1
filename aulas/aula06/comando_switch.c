@@ -22,7 +22,7 @@ int main () {
         printf("Nota invalida! tente novamente.\n");
     }
 
-    switch(nota) {
+    switch(nota) { // esse e o correto a se utilizar, faz a mesma coisa do de cima 
         case 1:printf("Voce ganhou uma estrela *\n");break;
         case 2:printf("Voce ganhou duas estrelas **\n");break;
         case 3:printf("Voce ganhou tres estrelas ***\n");break;
