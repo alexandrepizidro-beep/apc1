@@ -191,7 +191,137 @@ int main() {
             printf("Endereco: %s\n", obras[achei].endereco);
             printf("Responsavel: %s\n", obras[achei].responsavel);
 
-        
+        if(obras[achei].valor >= 1000000.0) {
+            printf("Valor: R$ %.2fM\n", obras[achei].valor / 1000000.0);
+        } else {
+            printf("Valor: R$ %.2f\n", obras[achei].valor);
+        }
+        printf("Status: ");
+
+        switch(obras[achei].status) {
+            case planejamento:
+            printf("Planejamento\n"); break;
+            case andamento:
+            printf("Em andamento\n"); break;
+            case concluida:
+            printf("Concluida\n"); break;
+            case paralisada:
+            printf("Paralisada\n"); break;
+                }
+            }
+        } break;
+
+        case 4:
+        if(quantidade == 0) {
+            printf("Nenhuma obra cadastrada para atualizar.\n");
+        } else {
+            achei = -1;
+        printf("Entre com o codigo da obra que deseja atualizar: ");
+        scanf("%i", &codigo);
+        while(getchar() != '\n');
+
+        for(int i = 0; i < quantidade; i++) {
+            if(obras[i].codigo == codigo) {
+            achei = i; break;
+                }
+            }
+
+        if(achei < 0) {
+            printf("Nao achei a obra com codigo %i.\n", codigo);
+        } else {
+        do {
+        printf("Entre com o novo nome da obra: ");
+        scanf("%[^\n]s", obras[achei].nome);
+        while(getchar() != '\n');
+
+        if(strlen(obras[achei].nome) == 0) {
+        printf("Nome invalido! Tente novamente.\n");
+            }
+        } while(strlen(obras[achei].nome) == 0);
+        do {
+        printf("Entre com o novo endereco da obra: ");
+        scanf("%[^\n]s", obras[achei].endereco);
+        while(getchar() != '\n');
+
+        if(strlen(obras[achei].endereco) == 0) {
+            printf("Endereco invalido! Tente novamente.\n");
+        }
+        } while(strlen(obras[achei].endereco) == 0);
+        do {
+        printf("Entre com o novo responsavel pela obra: ");
+        scanf("%[^\n]s", obras[achei].responsavel);
+        while(getchar() != '\n');
+
+        if(strlen(obras[achei].responsavel) == 0) {
+            printf("Responsavel invalido! Tente novamente.\n");
+            }
+        } while(strlen(obras[achei].responsavel) == 0);
+        do {
+            printf("Entre com o novo valor da obra: ");
+        scanf("%lf", &obras[achei].valor);
+        while(getchar() != '\n');
+
+        if(obras[achei].valor < 0) {
+        printf("Valor invalido! O valor nao pode ser negativo.\n");
+            }
+        } while(obras[achei].valor < 0);
+        do {
+            printf("Novo status da obra:\n");
+            printf("1 - Planejamento\n");
+            printf("2 - Em andamento\n");
+            printf("3 - Concluida\n");
+            printf("4 - Paralisada\n");
+            printf("Escolha o status => ");
+            scanf("%i", &status);
+            while(getchar() != '\n');
+
+        if(status < 1 || status > 4) {
+            printf("Status invalido! Tente novamente.\n");
+            }
+        } while(status < 1 || status > 4);
+        obras[achei].status = status;
+            printf("Obra atualizada com sucesso!\n");
+            }
+        } break;
+
+        case 5:
+        if(quantidade == 0) {
+        printf("Nenhuma obra cadastrada para remover.\n");
+        } else {
+        achei = -1;
+
+        printf("Entre com o codigo da obra que deseja remover: ");
+        scanf("%i", &codigo);
+        while(getchar() != '\n');
+
+        for(int i = 0; i < quantidade; i++) {
+        if(obras[i].codigo == codigo) {
+        achei = i; break;
+            }
+        }
+
+        if(achei < 0) {
+        printf("Nao achei a obra com codigo %i.\n", codigo);
+        } else {
+        for(int i = achei; i < quantidade - 1; i++) {
+            obras[i] = obras[i + 1];
+        }
+        quantidade--;
+        printf("Obra removida com sucesso!\n");
+            }
+        } break;
+
+        case 6:
+        printf("Encerrando o sistema...\n"); break;
+
+        default:
+        printf("Opcao invalida! Tente novamente.\n");
+        }
+
+        printf("\nPressione ENTER para continuar...");
+        getchar();
+
+    } while(opcao != 6);
 
     return 0;
 }
